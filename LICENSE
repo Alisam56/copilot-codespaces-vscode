@@ -1,20 +1,293 @@
-Copyright (c) GitHub and others
+import React, { useState } from 'react';
+import { Home, Book, Users, Trophy, Star } from 'lucide-react';
 
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-"Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
+const LughawyAppPrototype = () => {
+  const [currentScreen, setCurrentScreen] = useState('home');
+  const [userLevel, setUserLevel] = useState('مبتدئ');
+  const [points, setPoints] = useState(150);
+  const [activeStreaks, setActiveStreaks] = useState(5);
 
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
+  const screens = {
+    home: (
+      <div className="bg-amber-50 p-4 text-right">
+        <h1 className="text-2xl font-bold text-emerald-800">مرحبًا بك في لُغَوِي</h1>
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+        <div className="bg-white rounded-lg shadow-md p-4 mt-4">
+          <div className="flex justify-between items-center">
+            <div>
+              <p>المستوى: {userLevel}</p>
+              <p>النقاط: {points}</p>
+              <p>السلسلة الحالية: {activeStreaks}</p>
+            </div>
+            <Star color="#FFC107" fill="#FFC107" size={40} />
+          </div>
+        </div>
+
+        <div className="mt-6 space-y-4">
+          <button className="w-full bg-emerald-600 text-white p-3 rounded-lg flex items-center justify-between" onClick={() => setCurrentScreen('conversations')}>
+            <Book className="ml-2" />
+            <span>المحادثات اليومية</span>
+          </button>
+          <button className="w-full bg-amber-600 text-white p-3 rounded-lg flex items-center justify-between" onClick={() => setCurrentScreen('dialects')}>
+            <Users className="ml-2" />
+            <span>اللهجات العربية</span>
+          </button>
+          <button className="w-full bg-blue-600 text-white p-3 rounded-lg flex items-center justify-between" onClick={() => setCurrentScreen('challenges')}>
+            <Trophy className="ml-2" />
+            <span>التحديات الأسبوعية</span>
+          </button>
+        </div>
+      </div>
+    ),
+    conversations: (
+      <div className="bg-amber-50 p-4 text-right">
+        <h1 className="text-2xl font-bold text-emerald-800">المحادثات اليومية</h1>
+        <div className="mt-4 space-y-3">
+          <div className="bg-white rounded-lg p-3 shadow-sm">
+            <h2 className="font-semibold text-emerald-700">محادثة في المطعم</h2>
+            <p className="text-gray-600">تعلم كيفية طلب الطعام والتواصل في المطاعم</p>
+            <button className="mt-2 bg-emerald-500 text-white px-3 py-1 rounded-md">ابدأ المحادثة</button>
+          </div>
+          <div className="bg-white rounded-lg p-3 shadow-sm">
+            <h2 className="font-semibold text-emerald-700">محادثة في السوق</h2>
+            <p className="text-gray-600">تعلم مفردات التسوق والتفاوض</p>
+            <button className="mt-2 bg-emerald-500 text-white px-3 py-1 rounded-md">ابدأ المحادثة</button>
+          </div>
+        </div>
+      </div>
+    ),
+    dialects: (
+      <div className="bg-amber-50 p-4 text-right">
+        <h1 className="text-2xl font-bold text-emerald-800">اللهجات العربية</h1>
+        <div className="mt-4 space-y-3">
+          <div className="bg-white rounded-lg p-3 shadow-sm">
+            <h2 className="font-semibold text-emerald-700">اللهجة المصرية</h2>
+            <p className="text-gray-600">تعرف على المفردات والتعبيرات الشائعة</p>
+            <button className="mt-2 bg-emerald-500 text-white px-3 py-1 rounded-md">ابدأ الدرس</button>
+          </div>
+          <div className="bg-white rounded-lg p-3 shadow-sm">
+            <h2 className="font-semibold text-emerald-700">اللهجة المغربية</h2>
+            <p className="text-gray-600">اكتشف خصائص اللهجة المغربية</p>
+            <button className="mt-2 bg-emerald-500 text-white px-3 py-1 rounded-md">ابدأ الدرس</button>
+          </div>
+        </div>
+      </div>
+    ),
+    challenges: (
+      <div className="bg-amber-50 p-4 text-right">
+        <h1 className="text-2xl font-bold text-emerald-800">التحديات الأسبوعية</h1>
+        <div className="mt-4 space-y-3">
+          <div className="bg-white rounded-lg p-3 shadow-sm">
+            <h2 className="font-semibold text-emerald-700">تحدي المفردات</h2>
+            <div className="flex justify-between items-center">
+              <span className="text-gray-600">10 كلمة جديدة</span>
+              <span className="text-emerald-600">+20 نقطة</span>
+            </div>
+            <button className="mt-2 bg-emerald-500 text-white px-3 py-1 rounded-md">ابدأ التحدي</button>
+          </div>
+          <div className="bg-white rounded-lg p-3 shadow-sm">
+            <h2 className="font-semibold text-emerald-700">تحدي المحادثة</h2>
+            <div className="flex justify-between items-center">
+              <span className="text-gray-600">محادثة كاملة</span>
+              <span className="text-emerald-600">+50 نقطة</span>
+            </div>
+            <button className="mt-2 bg-emerald-500 text-white px-3 py-1 rounded-md">ابدأ التحدي</button>
+          </div>
+        </div>
+      </div>
+    ),
+  };
+
+  return (
+    <div className="max-w-md mx-auto h-screen bg-amber-100 shadow-lg">
+      {screens[currentScreen]}
+
+      <div className="fixed bottom-0 w-full bg-white border-t flex justify-around p-3">
+        <button onClick={() => setCurrentScreen('home')}>
+          <Home size={24} className={currentScreen === 'home' ? 'text-emerald-600' : 'text-gray-500'} />
+        </button>
+        <button onClick={() => setCurrentScreen('conversations')}>
+          <Book size={24} className={currentScreen === 'conversations' ? 'text-emerald-600' : 'text-gray-500'} />
+        </button>
+        <button onClick={() => setCurrentScreen('challenges')}>
+          <Trophy size={24} className={currentScreen === 'challenges' ? 'text-emerald-600' : 'text-gray-500'} />
+        </button>
+        <button onClick={() => setCurrentScreen('dialects')}>
+          <Users size={24} className={currentScreen === 'dialects' ? 'text-emerald-600' : 'text-gray-500'} />
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default LughawyAppPrototype;import React, { useState } from "react";
+import { Home, Book, Users, Trophy, Star } from "lucide-react";
+
+// مكون البطاقة القابلة لإعادة الاستخدام
+const Card = ({ title, description, buttonText, onClick }) => (
+  <div className="bg-white rounded-lg p-3 shadow-sm">
+    <h2 className="font-semibold text-emerald-700">{title}</h2>
+    <p className="text-gray-600">{description}</p>
+    <button
+      className="mt-2 bg-emerald-500 text-white px-3 py-1 rounded-md"
+      onClick={onClick}
+    >
+      {buttonText}
+    </button>
+  </div>
+);
+
+// شاشة الصفحة الرئيسية
+const HomeScreen = ({ userLevel, points, activeStreaks, setCurrentScreen }) => (
+  <div className="bg-amber-50 p-4 text-right">
+    <h1 className="text-2xl font-bold text-emerald-800">مرحبًا بك في لُغَوِي</h1>
+    <div className="bg-white rounded-lg shadow-md p-4 mt-4">
+      <div className="flex justify-between items-center">
+        <div>
+          <p>المستوى: {userLevel}</p>
+          <p>النقاط: {points}</p>
+          <p>السلسلة الحالية: {activeStreaks}</p>
+        </div>
+        <Star color="#FFC107" fill="#FFC107" size={40} />
+      </div>
+    </div>
+    <div className="mt-6 space-y-4">
+      <button
+        className="w-full bg-emerald-600 text-white p-3 rounded-lg flex items-center justify-between"
+        onClick={() => setCurrentScreen("conversations")}
+      >
+        <Book className="ml-2" />
+        <span>المحادثات اليومية</span>
+      </button>
+      <button
+        className="w-full bg-amber-600 text-white p-3 rounded-lg flex items-center justify-between"
+        onClick={() => setCurrentScreen("dialects")}
+      >
+        <Users className="ml-2" />
+        <span>اللهجات العربية</span>
+      </button>
+      <button
+        className="w-full bg-blue-600 text-white p-3 rounded-lg flex items-center justify-between"
+        onClick={() => setCurrentScreen("challenges")}
+      >
+        <Trophy className="ml-2" />
+        <span>التحديات الأسبوعية</span>
+      </button>
+    </div>
+  </div>
+);
+
+// شاشة المحادثات اليومية
+const ConversationsScreen = () => (
+  <div className="bg-amber-50 p-4 text-right">
+    <h1 className="text-2xl font-bold text-emerald-800">المحادثات اليومية</h1>
+    <div className="mt-4 space-y-3">
+      <Card
+        title="محادثة في المطعم"
+        description="تعلم كيفية طلب الطعام والتواصل في المطاعم"
+        buttonText="ابدأ المحادثة"
+        onClick={() => alert("بدأ المحادثة في المطعم")}
+      />
+      <Card
+        title="محادثة في السوق"
+        description="تعلم مفردات التسوق والتفاوض"
+        buttonText="ابدأ المحادثة"
+        onClick={() => alert("بدأ المحادثة في السوق")}
+      />
+    </div>
+  </div>
+);
+
+// شاشة اللهجات العربية
+const DialectsScreen = () => (
+  <div className="bg-amber-50 p-4 text-right">
+    <h1 className="text-2xl font-bold text-emerald-800">اللهجات العربية</h1>
+    <div className="mt-4 space-y-3">
+      <Card
+        title="اللهجة المصرية"
+        description="تعرف على المفردات والتعبيرات الشائعة"
+        buttonText="ابدأ الدرس"
+        onClick={() => alert("بدأ درس اللهجة المصرية")}
+      />
+      <Card
+        title="اللهجة المغربية"
+        description="اكتشف خصائص اللهجة المغربية"
+        buttonText="ابدأ الدرس"
+        onClick={() => alert("بدأ درس اللهجة المغربية")}
+      />
+    </div>
+  </div>
+);
+
+// شاشة التحديات الأسبوعية
+const ChallengesScreen = () => (
+  <div className="bg-amber-50 p-4 text-right">
+    <h1 className="text-2xl font-bold text-emerald-800">التحديات الأسبوعية</h1>
+    <div className="mt-4 space-y-3">
+      <Card
+        title="تحدي المفردات"
+        description="10 كلمة جديدة"
+        buttonText="ابدأ التحدي"
+        onClick={() => alert("بدأ تحدي المفردات")}
+      />
+      <Card
+        title="تحدي المحادثة"
+        description="محادثة كاملة"
+        buttonText="ابدأ التحدي"
+        onClick={() => alert("بدأ تحدي المحادثة")}
+      />
+    </div>
+  </div>
+);
+
+// مكون التطبيق الرئيسي
+const LughawyAppPrototype = () => {
+  const [currentScreen, setCurrentScreen] = useState("home");
+  const [userLevel, setUserLevel] = useState("مبتدئ");
+  const [points, setPoints] = useState(150);
+  const [activeStreaks, setActiveStreaks] = useState(5);
+
+  const renderScreen = () => {
+    switch (currentScreen) {
+      case "home":
+        return (
+          <HomeScreen
+            userLevel={userLevel}
+            points={points}
+            activeStreaks={activeStreaks}
+            setCurrentScreen={setCurrentScreen}
+          />
+        );
+      case "conversations":
+        return <ConversationsScreen />;
+      case "dialects":
+        return <DialectsScreen />;
+      case "challenges":
+        return <ChallengesScreen />;
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="max-w-md mx-auto h-screen bg-amber-100 shadow-lg">
+      {renderScreen()}
+      <div className="fixed bottom-0 w-full bg-white border-t flex justify-around p-3">
+        <button onClick={() => setCurrentScreen("home")}>
+          <Home size={24} className={currentScreen === "home" ? "text-emerald-600" : "text-gray-500"} />
+        </button>
+        <button onClick={() => setCurrentScreen("conversations")}>
+          <Book size={24} className={currentScreen === "conversations" ? "text-emerald-600" : "text-gray-500"} />
+        </button>
+        <button onClick={() => setCurrentScreen("challenges")}>
+          <Trophy size={24} className={currentScreen === "challenges" ? "text-emerald-600" : "text-gray-500"} />
+        </button>
+        <button onClick={() => setCurrentScreen("dialects")}>
+          <Users size={24} className={currentScreen === "dialects" ? "text-emerald-600" : "text-gray-500"} />
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default LughawyAppPrototype;
